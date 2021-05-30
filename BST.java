@@ -26,20 +26,20 @@ class BST {
             root.right = put_recursive(root.right, key);
         return root;
     }
-    void inorder() {
-        inorder_recursive(root);
+    void out() {
+        out_recursive(root);
     }
-    void inorder_recursive(Node root) {
+    void out_recursive(Node root) {
         if (root != null) {
-            inorder_recursive(root.left);
+            out_recursive(root.left);
             System.out.print(root.key + " ");
-            inorder_recursive(root.right);
+            out_recursive(root.right);
         }
     }
     void deleteKey(int key) {
         root = delete_Recursive(root, key);
     }
-    int GetMin(Node root)  {
+    int getMin(Node root)  {
         int GetMin = root.key;
         while (root.left != null)  {
             GetMin = root.left.key;
@@ -49,16 +49,16 @@ class BST {
     }
     Node delete_Recursive(Node root, int key)  {
         if (root == null)  return root;
-        if (key < root.key)     //traverse left subtree
+        if (key < root.key)
             root.left = delete_Recursive(root.left, key);
-        else if (key > root.key)  //traverse right subtree
+        else if (key > root.key)
             root.right = delete_Recursive(root.right, key);
         else  {
             if (root.left == null)
                 return root.right;
             else if (root.right == null)
                 return root.left;
-            root.key = GetMin(root.right);
+            root.key = getMin(root.right);
             root.right = delete_Recursive(root.right, root.key);
         }
         return root;
@@ -89,19 +89,19 @@ class Main{
         bst.put(60);
         bst.put(71);
         System.out.println("\nOriginal Tree :");
-        bst.inorder();
-        boolean ret_val = bst.search (3);
-        System.out.println("Check whether Node with value 3 exists :" + ret_val );
-        System.out.println("\nDelete Node with two children (2) : ");
+        bst.out();
+        boolean ex = bst.search (3);
+        System.out.println("Check whether Node with value 3 exists: " + ex );
+        System.out.println("\nDelete Node with two children (2): ");
         bst.deleteKey(3);
-        bst.inorder();
-        System.out.println("\nThe BST after Delete 48(leaf node):");
+        bst.out();
+        System.out.println("\nDelete leaf node (48): ");
         bst.deleteKey(48);
-        bst.inorder();
-        System.out.println("\nDelete Node with no children (60) :");
+        bst.out();
+        System.out.println("\nDelete Node with no children (60): ");
         bst.deleteKey(60);
-        bst.inorder();
-        ret_val = bst.search (3);
-        System.out.println("\nCheck whether Node with value 3 exists :" + ret_val );
+        bst.out();
+        ex = bst.search (3);
+        System.out.println("\nCheck whether Node with value 3 exists: " + ex );
     }
 }
